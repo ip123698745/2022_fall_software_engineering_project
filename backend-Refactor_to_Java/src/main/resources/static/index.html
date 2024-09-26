@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<html>
+<head>
+    <title>Your first Spring application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p><a href="/hello">Greet the world!</a></p>
+
+<form action="/hello" method="GET" id="nameForm">
+    <div>
+        <label for="nameField">How should the app call you?</label>
+        <input name="myName" id="nameField">
+        <button>Greet me!</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    window.onload = async function() {
+        await axios.post('https://localhost:5005/jira/boardInfo', {
+            domainURL: "selab1623-pd",
+            apiToken: "r3YRMVLevx81HWHiBgEn6D18",
+            account: "hung61601@gmail.com",
+            boardId: 5,
+            projectId: 5
+        });
+
+        await axios.get('/repoInfo/contribute/45')
+
+        await axios.get('https://localhost:5005/hello')
+
+        await axios.get('https://localhost:5005/hello', {
+            params: {
+                myName: "Alice",
+            }
+        })
+
+        var myName = "Herbert";
+        await axios.get(`https://localhost:5005/hello?myName=${myName}`);
+    }
+
+    console.log('has been implement');
+</script>
+
+</body>
+</html>

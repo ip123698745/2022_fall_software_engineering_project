@@ -1,0 +1,63 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'jacoco'
+}
+
+group = 'com.example'
+version = '0.0.1'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	// sqlite
+	implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
+	implementation 'com.github.gwenn:sqlite-dialect:0.1.0'
+	// util
+	compileOnly 'org.projectlombok:lombok:1.18.22'
+	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+	// unit test
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+	testCompileOnly 'junit:junit:4.13.2'
+	testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.8.2'
+	// dao Integration testing
+	testRuntimeOnly 'com.h2database:h2'
+	// json
+	implementation 'com.google.code.gson:gson:2.9.0'
+	implementation 'org.json:json:20180813'
+	// Improve rest api request performance
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+	// Java JSON Web Token (JWT)
+
+	compileOnly 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5',
+			// Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+			//'org.bouncycastle:bcprov-jdk15on:1.70',
+			'io.jsonwebtoken:jjwt-jackson:0.11.5' // or 'io.jsonwebtoken:jjwt-gson:0.11.5' for gson
+
+}
+
+test {
+	useJUnitPlatform()
+}
+
+jacoco {
+	toolVersion = "0.8.3"
+}
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.destination file("${buildDir}/jacocoHtml")
+	}
+}
